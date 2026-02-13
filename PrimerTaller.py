@@ -49,3 +49,4 @@ def puntoSeis(R:float, H:float, v0:float, a:float):
     alturaMaxima = (v0**2)*(math.sin(math.radians(a)))**2/(2*9.8)
     return alcance, alturaMaxima
 
+print("Hola mundo desde CodeSpaces con python 3.10!!!")
