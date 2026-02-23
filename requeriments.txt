@@ -2,3 +2,4 @@ numpy
 matplot
 opencv-python
 mediapipe
+typer
