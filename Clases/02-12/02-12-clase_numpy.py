@@ -36,6 +36,7 @@ print(arr_lins)
 
 
 a = np.linspace(10,20,6)
+
 b = np.linspace(5,25,6)
 
 print("A: ", a)
