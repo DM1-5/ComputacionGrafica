@@ -3,3 +3,4 @@ matplot
 opencv-python
 mediapipe
 typer
+pillow

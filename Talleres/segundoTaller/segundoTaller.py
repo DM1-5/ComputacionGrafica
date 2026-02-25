@@ -1,6 +1,7 @@
 import numpy as np 
 import matplotlib.pyplot as plt 
 import math
+from PIL import Image
 
 def color_a_RGB(color):
     """Convierte un color a su representación RGB en el rango de 0 a 1"""
@@ -124,8 +125,6 @@ def punto_Dos():
     plt.axis("off")
     plt.title("Ejercicio 2")
     plt.show()
-
-
 
 
 punto_Dos()
