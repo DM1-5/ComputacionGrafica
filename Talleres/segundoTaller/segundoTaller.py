@@ -24,7 +24,7 @@ def pintar_Pixel(imagen, fila, columna, color):
     print(f"Pixel ({fila},{columna}) pintado de color {color}")    
 
 def punto_Uno():
-    """Crea una imagen de 3x3"""
+    """Crea una imagen de 3x3 y se le agrega color a cada pixel"""
     ejercicio1 = np.zeros((3,3,3))
     # crea un arreglo de 3 dimensiones con 3 filas, 3 columnas y 3 canales de color (RGB), lleno de unos.
 
@@ -100,7 +100,7 @@ def punto_Uno():
 
 
 def punto_Dos():
-    """ Crea una imagen de 7x11"""
+    """ Crea una imagen de 7x11 se le agrega color"""
     ejercicio2 = np.zeros((7,11,3))
     # crea un arreglo de 3 dimensiones con 7 filas, 11 columnas y 3 canales de color (RGB), lleno de ceros.
     
@@ -126,6 +126,10 @@ def punto_Dos():
     plt.title("Ejercicio 2")
     plt.show()
 
+def punto_Tres(ruta):
+    """Invierte los colores de una imagen"""
+    img = plt.imread(ruta)
+    inv
 
 punto_Dos()
 #punto_Uno()
