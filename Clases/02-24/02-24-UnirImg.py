@@ -13,8 +13,9 @@ print("personaje")
 print(img_personaje.dtype)
 print(img_personaje.shape)
 
-#h,w,_ = img_fondo.shape
-#img_fondo = np.array(Image.fromarray(img_personaje).resize((w, h)))
+# Cambia el tamaño de las imagenes para unirlas.
+  #h,w,_ = img_fondo.shape
+  #img_fondo = np.array(Image.fromarray(img_personaje).resize((w, h)))
 
 A = img_fondo.astype(np.float32)
 B = img_personaje.astype(np.float32)

@@ -16,17 +16,16 @@ print("max/min:", img.max(), img.min()) # Retorna el valor maximo y minimo de lo
 # Para imagenes en png el valor maximo es 1.0 y el valor minimo es 0.0, lo que indica que la imagen esta normalizada entre 0 y 1.
 
 # Crea una copia de las capas.
-CapaC =np.copy(img)
-CapaM =np.copy(img)
-CapaA =np.copy(img)
+CapaR =np.copy(img)
+CapaG =np.copy(img)
+CapaB =np.copy(img)
 
-# Capa Cyan
-CapaC[:,:,0] = 0 # Elimino el canal rojo
-# Capa Magenta  
-CapaM[:,:,1]= 0 # Elimino el canal verde
-# Capa Amarilla
-CapaA[:,:,2]= 0 # Elimino el canal Azul
-
+# Capa roja
+CapaR[:,:,1] = CapaR[:,:,2] = 0 
+# Capa verde
+CapaG[:,:,0] = CapaG[:,:, 2] = 0
+# Capa azul
+CapaB[:,:,0] = CapaB[:,:,1] = 0
 
 
 # Muestra las imagenes 
@@ -37,21 +36,21 @@ plt.title("Imagen original")
 
 # Mostrar la capa roja
 plt.subplot(2,2,2)
-plt.imshow(CapaC)
+plt.imshow(CapaR)
 plt.axis("off")
-plt.title("Capa Cyan")
+plt.title("Capa roja")
 
 # Mostrar la capa roja
 plt.subplot(2,2,3)
-plt.imshow(CapaM)
+plt.imshow(CapaG)
 plt.axis("off")
-plt.title("Capa Magenta")
+plt.title("Capa verde")
 
 # Mostrar la capa roja
 plt.subplot(2,2,4)
-plt.imshow(CapaA)
+plt.imshow(CapaB)
 plt.axis("off")
-plt.title("Capa Amarilla")
+plt.title("Capa azul")
 
 
 # Mostrar todas las figuras en una ventana 
