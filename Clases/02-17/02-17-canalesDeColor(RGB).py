@@ -1,8 +1,6 @@
 import numpy as np 
 import matplotlib.pyplot as plt 
 
-ruta = "datos.jpg"
-
 img = plt.imread(ruta)
 
 print("tipo:", type(img)) # Retorna el tipo de dato de la variable img, que es un arreglo de numpy.

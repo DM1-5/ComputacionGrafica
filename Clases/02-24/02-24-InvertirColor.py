@@ -1,10 +1,15 @@
 import numpy as np 
 import matplotlib.pyplot as plt 
 from PIL import Image
+from pathlib import Path
 
-ruta = "datos.jpg"
+BASE = Path(__file__).parent # Ruta del directorio actual del archivo .py
+imagen = "datos.jpg"
+
+ruta = BASE.parent.parent / "Imagenes" / imagen # Ruta del archivo de imagen, que se encuentra en el directorio "Imagenes" que esta en el mismo nivel que el directorio "Clases".
 
 img = plt.imread(ruta)
+
 
 print("tipo:", type(img)) # Retorna el tipo de dato de la variable img, que es un arreglo de numpy.
 

@@ -1,10 +1,11 @@
 import numpy as np 
 import matplotlib.pyplot as plt 
+from pathlib import Path
 
+BASE = Path(__file__).parent # Ruta del directorio actual del archivo .py
+imagen = "nasa.jpg"
 
-print("Escala de grises")
-
-ruta="nasa.jpg"
+ruta = BASE.parent.parent / "Imagenes" / imagen # Ruta del archivo de imagen, que se encuentra en el directorio "Imagenes" que esta en el mismo nivel que el directorio "Clases".
 
 img = plt.imread(ruta)
 
