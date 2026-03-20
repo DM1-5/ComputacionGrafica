@@ -327,21 +327,25 @@ def traslacion(ruta, dx, dy):
     return trasladada
 
 def recorte(ruta, xini, xfin, yini, yfin):
+    """Toma una ruta de imagen y coordenadas de recorte, retorna la imagen recortada."""
     img = plt.imread(ruta)
     recorte = img[yini:yfin, xini:xfin]
     return recorte
 
 def reduccion_Resolucion(ruta, factor):
+    """Toma una ruta de imagen y un factor de reducción, retorna la imagen con resolución reducida."""
     img = plt.imread(ruta)
     reducida = img[::factor, ::factor]
     return reducida
 
 def rotar(ruta, angulo):
-    img = plt.imread(ruta)
-    # Utilizar una librería. 
-    return rotada
+    """Toma una ruta de imagen y un ángulo en grados, retorna la imagen rotada."""
+    img = Image.open(ruta)
+    rotada = img.rotate(angulo, expand=True)  # usa PIL
+    return np.array(rotada)
 
 def zoom(ruta, zoom, zoom_factor):
+    """Toma una ruta de imagen, un tamaño de zoom y un factor de zoom, retorna la imagen con zoom aplicado."""
     img = plt.imread(ruta)
     h, w = img.shape[:2]
     start_row = h // 2 - zoom // 2
@@ -354,13 +358,35 @@ def zoom(ruta, zoom, zoom_factor):
     zoomed = zoomed.astype(img.dtype)
     return zoomed
 
+def histograma(ruta):
+    """Toma una ruta de imagen y muestra el histograma de cada canal de color."""
+    img = plt.imread(ruta)
+    imgR = img[:,:,0]
+    imgG = img[:,:,1]
+    imgB = img[:,:,2]
+
+    if img.max() <= 1.0:
+        imgR = (imgR * 255).astype(np.uint8)
+        imgG = (imgG * 255).astype(np.uint8)
+        imgB = (imgB * 255).astype(np.uint8)    
+    
+    plt.subplot(3, 1, 1)
+    plt.hist(imgR.ravel(), bins=256, color="red")
+    plt.subplot(3, 1, 2)
+    plt.hist(imgG.ravel(), bins=256, color="green")
+    plt.subplot(3, 1, 3)
+    plt.hist(imgB.ravel(), bins=256, color="blue")
+    plt.show()
+
 def main():
     BASE = Path(__file__).parent # Ruta del directorio actual del archivo .py
-    imagen = "datos.png"
-    #imagen = "nasa.jpg"
+    #imagen = "datos.png"
+    imagen = "nasa.jpg"
 
     ruta = BASE.parent.parent / "Imagenes" / imagen # Ruta del archivo de imagen, que se encuentra en el directorio "Imagenes" que esta en el mismo nivel que el directorio "Clases".
     img = plt.imread(ruta)
+
+    
 
 
 
