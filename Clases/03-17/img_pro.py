@@ -9,11 +9,11 @@ ruta = BASE.parent.parent / "Imagenes" / imagen # Ruta del archivo de imagen, qu
 
 def aumentar_brillo(imagen, valor):
     if imagen.dtype == np.uint8:
-        print(f"La imagen es de tipo {imagen.dtype}")
+        #print(f"La imagen es de tipo {imagen.dtype}")
         imgf = imagen.astype(np.float32)
         img_clip = (np.clip(imgf + valor, 0 , 255)).astype(np.uint8)
     else:  
-        print(f"La imagen es de tipo {imagen.dtype}")
+        #print(f"La imagen es de tipo {imagen.dtype}")
         img_clip = np.clip(imagen + valor/255.0, 0 , 1) 
 
     return img_clip

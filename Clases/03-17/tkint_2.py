@@ -90,7 +90,7 @@ def resetear():
     entrada.insert(0, "0")
     mostrar_imagen()
 
-
+# Construccion de la ventana
 ventana = tk.Tk()
 ventana.title("Brillo de imagen")
 ventana.geometry("520x500")
@@ -102,7 +102,8 @@ entrada = tk.Entry(ventana, width=10)
 entrada.pack()
 entrada.insert(0, "0") # Establece el valor predeterminado de la caja de texto en 0 
 
-btn_aplicar = tk.Button(ventana, text="Aplicar brillo", command=aplicar_desde_boton)
+btn_aplicar = tk.Button(ventana, text="Aplicar brillo", 
+                        command=aplicar_desde_boton)
 btn_aplicar.pack(pady=5)
 
 btn_reset = tk.Button(ventana, text="Resetear", command=resetear)
