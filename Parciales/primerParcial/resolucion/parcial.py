@@ -109,5 +109,5 @@ def puntoDos():
   mostrar_Imagen(gris2, "Gris Luminosity Imagen 2", cmap="gray")
 
 
-#puntoUno()
-puntoDos()
+puntoUno()
+#puntoDos()
