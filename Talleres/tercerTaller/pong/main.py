@@ -1,5 +1,8 @@
 import pygame
+import numpy as np
+from PIL import Image
 
+# EL PONG HACE PARTE DE LA ENTREGA DE PYGAME 
 
 # pong 
 
@@ -9,13 +12,36 @@ import pygame
 # 3. colision con las jugadores
 # 4. sistema de puntos
 
-if __name__ == "__main__":
+
+def menu():
+    global ancho, alto
+    ancho, alto = 1280, 720
+    screen = pygame.display.set_mode((ancho, alto))
+    imgAyuda = pygame.image.load("menu.png")
+    screen.blit(imgAyuda, (0, 0))
+    pygame.display.flip()
+    pygame.time.delay(5000)
+    #juego()
+    pass
+
+
+def inicio():
     # CONFIGURACION 
-    pygame.init()
+    global ancho, alto
+    ancho, alto = 1280, 720
+    screen = pygame.display.set_mode((ancho, alto))
+    imgAyuda = pygame.image.load("presentacion.png")
+    screen.blit(imgAyuda, (0, 0))
+    pygame.display.flip()
+    pygame.time.delay(5000)
+
+    menu()
+
+def juego():
     ancho, alto = 600, 400
     screen = pygame.display.set_mode((ancho, alto))
     clock = pygame.time.Clock()
-    
+
     # COLORES Gruvbox 
     textoColor = (251, 241, 199)
     fondo = (40, 40, 40)
@@ -149,4 +175,19 @@ if __name__ == "__main__":
         pygame.display.flip()
         clock.tick(60)
 
-pygame.quit()
+
+def ayuda():
+    global ancho, alto
+    ancho, alto = 1280, 720
+    screen = pygame.display.set_mode((ancho, alto))
+    imgAyuda = pygame.image.load("ayuda.png")
+    screen.blit(imgAyuda, (0, 0))
+    pygame.display.flip()
+    pygame.time.delay(5000)
+    
+    #menu()
+
+if __name__ == "__main__":
+    inicio()
+    pygame.quit()
+    
