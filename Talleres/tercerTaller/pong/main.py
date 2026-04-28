@@ -14,20 +14,38 @@ from PIL import Image
 
 
 def menu():
-    global ancho, alto
-    ancho, alto = 1280, 720
+    ancho, alto = 600, 400
     screen = pygame.display.set_mode((ancho, alto))
-    imgAyuda = pygame.image.load("menu.png")
-    screen.blit(imgAyuda, (0, 0))
+    imgMenu = pygame.image.load("bitMenu1.png")
+    screen.blit(imgMenu, (0, 0))
     pygame.display.flip()
-    pygame.time.delay(5000)
-    #juego()
-    pass
+    running = True 
 
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                pos = pygame.mouse.get_pos()
+                print(pos)
+                
+                # Pulsa el boton de jugar
+                if pos[0] >= 240 and pos[0] <= 367 and pos[1] >= 144 and pos[1] <= 191:
+                    juego()
+                    running = False
+
+                # Pulsa el boton de ayuda
+                if pos[0] >= 240 and pos[0] <= 367 and pos[1] >= 225 and pos[1] <= 270:
+                    ayuda()
+                    running = False
+                
+                # Pulsa el boton de salir
+                if pos[0] >= 240 and pos[0] <= 367 and pos[1] >= 305 and pos[1] <= 350:
+                    running = False
 
 def inicio():
     # CONFIGURACION 
-    global ancho, alto
     ancho, alto = 1280, 720
     screen = pygame.display.set_mode((ancho, alto))
     imgAyuda = pygame.image.load("presentacion.png")
@@ -54,8 +72,10 @@ def juego():
     puntos2 = 0
 
     pygame.font.init()
-    fuente = pygame.font.SysFont("Fira Sans", 30)  #Fuente
-    texto = fuente.render(f"{puntos1} vs {puntos2}", True ,  textoColor) #Renderizar
+    fuente = pygame.font.SysFont("m5x7", 60)  #Fuente
+    puntaje1 = fuente.render(f"0{puntos1}", True ,  verde) 
+    puntaje2 = fuente.render(f"0{puntos2}", True ,  azul) 
+    #texto = fuente.render(f"{puntos1} vs {puntos2}", True ,  textoColor) #Renderizar
 
     # AUDIOS 
     # Los sonidos los generé con gemini 
@@ -67,9 +87,9 @@ def juego():
     fin = pygame.mixer.Sound("fin.wav")
 
     # Jugador1
-    pos1 = [0, alto/2 - 25]  # posición inicial
+    pos1 = [10, alto/2 - 25]  # posición inicial
     # Jugador2
-    pos2 = [ancho - 10, alto/2 - 25]  # posición inicial
+    pos2 = [ancho - 20, alto/2 - 25]  # posición inicial
     # pelota
     posc = [ancho/2, alto/2] # posición inicial
     vel = 20           # velocidad de movimiento
@@ -87,17 +107,17 @@ def juego():
                 running = False
 
             keys = pygame.key.get_pressed()
-            # Esta es la posicion de y (w para subir)
+            # Esta es la posicion de jugador 1 (w para subir)
             if keys[pygame.K_w] and pos1[1] > 0:
                 pos1[1] -= vel
-            # Esta es la posicion de y (s para bajar)
+            # Esta es la posicion de jugador 1 (s para bajar)
             if keys[pygame.K_s] and pos1[1] < alto - 50:
                 pos1[1] += vel
 
-            # Esta es la posicion del jugador 1 y (w para subir)
+            # Esta es la posicion del jugador 2 (flecha arriba para subir)
             if keys[pygame.K_UP] and pos2[1] > 0:
                 pos2[1] -= vel
-                # Esta es la posicion del jugador 2 y (s para bajar)
+                # Esta es la posicion del jugador 2 (flecha abajo para bajar)
             if keys[pygame.K_DOWN] and pos2[1] < alto - 50:
                 pos2[1] += vel
 
@@ -114,7 +134,8 @@ def juego():
             pelotaVel_x *= -1
             pelotaVel_y *= -1
             puntos1 += 1
-            texto = fuente.render(f"{puntos1} vs {puntos2}", True , textoColor) #Renderizar
+            puntaje1 = fuente.render(f"0{puntos1}", True ,  verde) #Renderizar
+            #texto = fuente.render(f"{puntos1} vs {puntos2}", True , textoColor) #Renderizar
             gol1.play()
 
         # PELOTA TOCA IZQUIERDA
@@ -125,7 +146,8 @@ def juego():
             pelotaVel_x *= -1
             pelotaVel_y *= -1
             puntos2 += 1
-            texto = fuente.render(f"{puntos1} vs {puntos2}", True , textoColor) #Renderizar
+            puntaje2 = fuente.render(f"0{puntos2}", True ,  azul) 
+            #texto = fuente.render(f"{puntos1} vs {puntos2}", True , textoColor) #Renderizar
             gol1.play()
 
         if puntos1 == 5:
@@ -137,6 +159,7 @@ def juego():
             pygame.display.flip()
             pygame.time.delay(5000)
             running = False
+            menu()
 
         if puntos2 == 5:
             fin.play()
@@ -147,6 +170,7 @@ def juego():
             pygame.display.flip()
             pygame.time.delay(5000)
             running = False
+            menu()
             
 
         posc[0] += pelotaVel_x
@@ -154,7 +178,9 @@ def juego():
 
         screen.fill(fondo)
         # Dibujar el puntaje en la parte superior centrado
-        screen.blit(texto, (ancho/2 - 100/2, 10))  #Dibujar en pantalla
+        screen.blit(puntaje1, (10, 10))
+        screen.blit(puntaje2, (ancho - 10 - puntaje2.get_width(), 10))
+        #screen.blit(texto, (ancho/2 - 100/2, 10))  #Dibujar en pantalla
 
         # Rectángulo: (superficie, color, (x,y,ancho,alto), grosor=0 relleno)
         # jugador 1
@@ -175,19 +201,34 @@ def juego():
         pygame.display.flip()
         clock.tick(60)
 
-
 def ayuda():
-    global ancho, alto
-    ancho, alto = 1280, 720
+    ancho, alto = 600, 400
     screen = pygame.display.set_mode((ancho, alto))
-    imgAyuda = pygame.image.load("ayuda.png")
+    imgAyuda = pygame.image.load("HELP_textos.png")
     screen.blit(imgAyuda, (0, 0))
     pygame.display.flip()
-    pygame.time.delay(5000)
     
+    running = True 
+
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                pos = pygame.mouse.get_pos()
+                print(pos)
+                
+                # Pulsa el boton de jugar
+                if pos[0] >= 50 and pos[0] <= 160 and pos[1] >= 320 and pos[1] <= 367:
+                    menu()
+                    running = False
     #menu()
 
 if __name__ == "__main__":
-    inicio()
+    #inicio()
+    menu()
+    #juego()
+    #ayuda()
     pygame.quit()
     
